@@ -8,6 +8,8 @@ class ChatController{
 
     public function chat():void{
         $route="chat";
+        
+        
         require "templates/layout.phtml";
     }
 }
