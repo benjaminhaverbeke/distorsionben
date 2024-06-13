@@ -19,7 +19,7 @@ require "managers/AbstractManager.php";
 require "managers/CategoryManager.php";
 require "managers/MessageManager.php";
 require "managers/SalonManager.php";
-require "managers/UserManager.php;";
+require "managers/UserManager.php";
 
 /**Controllers */
 
