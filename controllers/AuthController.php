@@ -76,4 +76,15 @@ class AuthController
             require 'templates/layout.phtml';
         }
     }
+    public function disconnect(): void
+    {
+        session_destroy();
+        $route = "deconnexion";
+        require 'templates/layout.phtml';
+    }
+    public function error(): void
+    {
+        $route = "error";
+        require 'templates/layout.phtml';
+    }
 }
