@@ -1,0 +1,155 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : jeu. 13 juin 2024 à 09:06
+-- Version du serveur : 8.3.0
+-- Version de PHP : 8.3.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `distorsion`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `name`) VALUES
+(1, 'Spiritualité'),
+(2, 'Sport'),
+(3, 'Médecine');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `message_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `salon_id` int NOT NULL,
+  `datetime` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `user_id` (`user_id`),
+  KEY `salon_id` (`salon_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `user_id`, `salon_id`, `datetime`, `content`) VALUES
+(1, 3, 4, '2024-01-17 12:00:00', 'J\'adore la position du dieu du vent'),
+(2, 2, 4, '2024-01-17 12:07:30', 'Wah moi aussi, c\'est vraiment aérien, mon yoni respire !!!! '),
+(3, 1, 7, '2023-01-17 12:07:30', 'Bonjour à tous, \r\nJe suis admin web mais aussi electro-sensible. OUI ça existe !!!! '),
+(4, 2, 7, '2023-01-17 14:07:30', 'Ohlalala cela doit être compliqué, je t\'envoie des ondes positives pour contrecarrer toutes ces ondes cancérigènes. Namasté '),
+(5, 1, 7, '2024-01-17 15:10:00', 'OUI ce n\'est pas facile tous les jours....... Heureusement que j\'ai mes pierres pour purifier mon espace de vie......'),
+(6, 3, 3, '2024-01-17 12:07:30', 'J\'adore la danse, c\'est vraiment trop bien POUET POUET POUET !!!!'),
+(7, 1, 6, '2022-01-17 20:00:00', 'Chakra du troisième œil : prise de recul, sagesse, intuition, conscience.	Bleu foncé.\r\n\r\nViolet (indigo) : sagesse, magie, mystère, rêve, spiritualité.\r\n\r\nJaune.	Pierres bleues foncées : oeil de faucon, labradorite, aventurine bleue, apatite bleue, azurite, sodalite, saphir.\r\n\r\nPierres violettes : améthyste.\r\n\r\nPierres jaunes : calcite jaune, citrine, oeil de tigre.\r\n\r\nVoilà mes pierres préférées et vous ?'),
+(8, 3, 6, '202-02-19 13:12:30', 'Quelle belle collection, moi j\'ai une très belle collection de Jaspes :\r\n    Jaspe breccia\r\n    Jaspe dalmatien\r\n    Jaspe impérial\r\n    Jaspe kambaba\r\n    Jaspe léopard\r\n    Jaspe mookaïte\r\n    Jaspe océan\r\n    Jaspe orbiculaire\r\n    Jaspe paysage\r\n    Jaspe rouge\r\nC\'est très bon pour le chakra racine et la constipation !!! ;)'),
+(9, 2, 5, '2024-08-10 10:00:00', 'Je pratique des rituels de la fougère chamanique en forêt de Brocéliande, n\'hésitez pas à me contacter pour des retraites de guérison.'),
+(10, 2, 2, '2020-09-10 12:07:30', 'Que faites-vous pour réveiller votre féminin sacré ? Moi j\'adore me mettre du vernis dans ma morning routine, et aussi me rappeler ma place inférieure dans la société :D'),
+(11, 1, 1, '2019-01-05 00:00:00', 'Personnellement j\'adore gorger mon plexus solaire en faisant de sungazing le WE. Et vous ?'),
+(12, 3, 1, '2019-01-10 14:07:30', 'Très bonne idée, je pratique aussi cela depuis quelques années, je sens aussi de gros impacts sur mon chakra 3eme oeil qui s\'ouvre de plus en plus !');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `salons`
+--
+
+DROP TABLE IF EXISTS `salons`;
+CREATE TABLE IF NOT EXISTS `salons` (
+  `salon_id` int NOT NULL AUTO_INCREMENT,
+  `category_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`salon_id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `salons`
+--
+
+INSERT INTO `salons` (`salon_id`, `category_id`, `name`) VALUES
+(1, 1, 'Chakras'),
+(2, 1, 'Féminin Sacré'),
+(3, 2, 'Danse Extatique'),
+(4, 2, 'Yoga'),
+(5, 3, 'Druidisme'),
+(6, 3, 'Lithothérapie'),
+(7, 3, 'Electro-sensibilité');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`user_id`, `email`, `name`, `password`, `role`) VALUES
+(1, 'admin@mail.fr', 'testAdmin', 'yes', 'ADMIN'),
+(2, 'user@mail.fr', 'testUser', 'yes', 'USER'),
+(3, 'oui@oui.fr', 'Oui Oui', 'pouetpouet', 'USER');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`salon_id`) REFERENCES `salons` (`salon_id`);
+
+--
+-- Contraintes pour la table `salons`
+--
+ALTER TABLE `salons`
+  ADD CONSTRAINT `salons_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
