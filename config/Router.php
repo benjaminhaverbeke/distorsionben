@@ -1,20 +1,25 @@
 <?php
 
-class Router{
+class Router
+{
     public function __construct()
     {
-        
     }
 
-    public function handleRequest(array $get):void{
+    public function handleRequest(array $get): void
+    {
         $pc = new PageController();
         $cc = new ChatController();
         $auc = new AuthController();
-        if(isset($get["route"]) && $get["route"]==="chat"){
-            $cc->chat();
-        }else if(isset($get["route"]) && $get["route"]==="a-propos"){
+        if (isset($get["route"]) && $get["route"] === "chat") {
+            if (isset($get['salon'])) {
+                $cc->salon($get['salon']);
+            } else {
+                $cc->chat();
+            }
+        } else if (isset($get["route"]) && $get["route"] === "a-propos") {
             $pc->about();
-        }else if(isset($get["route"]) && $get["route"]==="connexion"){
+        } else if (isset($get["route"]) && $get["route"] === "connexion") {
             $auc->signIn();
         
         
@@ -44,11 +49,10 @@ class Router{
         
         
         else if(!isset($get["route"])){
+
             $pc->home();
-        }else{
+        } else {
             $pc->notFound();
         }
     }
 }
-
-?>

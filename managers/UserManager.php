@@ -8,7 +8,7 @@ class UserManager extends AbstractManager
         parent::__construct();
     }
 
-    public function findByEmail(string $email) : ? User
+    public function findByEmail(string $email): ?User
     {
         $query = $this->db->prepare('SELECT * FROM users WHERE email=:email');
 
@@ -19,8 +19,7 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result)
-        {
+        if ($result) {
             $user = new User($result["name"], $result["email"], $result["password"], $result["role"]);
             $user->setId($result["user_id"]);
 
@@ -30,9 +29,9 @@ class UserManager extends AbstractManager
         return null;
     }
 
-    public function findOne(int $id) : ? User
+    public function findOne(int $id): ?User
     {
-        $query = $this->db->prepare('SELECT * FROM users WHERE id=:id');
+        $query = $this->db->prepare('SELECT * FROM users WHERE user_id=:id');
 
         $parameters = [
             "id" => $id
@@ -41,8 +40,7 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result)
-        {
+        if ($result) {
             $user = new User($result["name"], $result["email"], $result["password"], $result["role"]);
             $user->setId($result["user_id"]);
 
@@ -52,15 +50,15 @@ class UserManager extends AbstractManager
         return null;
     }
 
-    public function createUser(User $user) : void
+    public function createUser(User $user): void
     {
-        
+
         $parameters = [
             "name" => $user->getName(),
             "password" => $user->getPassword(),
             "email" => $user->getEmail(),
             "role" => $user->getRole(),
-            
+
         ];
         
         
@@ -71,74 +69,64 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
 
         $user->setId($this->db->lastInsertId());
-
     }
-    
-    public function findAll() : array {
-        
+
+    public function findAll(): array
+    {
+
         $query = $this->db->prepare('SELECT * FROM users');
         $query->execute();
         $usersList = $query->fetchAll(PDO::FETCH_ASSOC);
         $usersTable = [];
-        
-        foreach($usersList as $user){
-            
+
+        foreach ($usersList as $user) {
+
             $newUser = new User($user["name"], $user["email"], $user["password"], $user["role"]);
             $newUser->setId($user['user_id']);
             array_push($usersTable, $newUser);
-            
-            
         }
-        
-        
+
+
         return $usersTable;
-        
     }
-    
-    public function deleteUser(int $user){
-        
-        
-        
-        
+
+    public function deleteUser(int $user)
+    {
+
+
+
+
         $parameters = [
             'id' => $user
-                    ];
+        ];
 
 
 
         $query = $this->db->prepare("DELETE FROM users WHERE id=:id");
- 
+
 
         $query->execute($parameters);
-        
-        
     }
-    
+
     public function ModifyUser(User $user)
     {
-        
+
         $parameters = [
             'id' => $user->getId(),
             'name' => $user->getName(),
             'password' => $user->getPassword(),
             'email' => $user->getEmail(),
             'role' => $user->getRole()
-            
-            
-            ];
-            
-            var_dump($parameters);
-        
+
+
+        ];
+
+        var_dump($parameters);
+
         $query = $this->db->prepare("UPDATE users
         SET name=:name, password=:password, email=:email, role=:role
         WHERE id =:id");
-        
+
         $query->execute($parameters);
-        
     }
-    
-    
 }
-
-
-?>

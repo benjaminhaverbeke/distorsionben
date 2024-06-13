@@ -6,13 +6,25 @@ class ChatController
     {
     }
 
-    public function chat($id): void
+    public function chat(): void
     {
         //init manager
-        $instance = new SalonManager;
+        $cm = new CategoryManager;
         //get all posts from selected category
-        $messages = $instance->findAllFromSalon($_GET['salon']);
+        $categories = $cm->findAll();
         $route = "chat";
+        require "templates/layout.phtml";
+    }
+    public function salon($id): void
+    {
+        //init manager
+        $mm = new MessageManager;
+        $cm = new CategoryManager;
+        $sm = new SalonManager;
+        //get all posts from selected category
+        $messages = $mm->findBySalon($id);
+        $categories = $cm->findAll();
+        $route = "salon";
         require "templates/layout.phtml";
     }
 }
