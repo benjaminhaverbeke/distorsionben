@@ -5,7 +5,6 @@ class ChatController
     public function __construct()
     {
     }
-
     public function chat(): void
     {
         //init manager

@@ -8,10 +8,9 @@ abstract class AbstractManager
     
     public function __construct(){
         
-        $host = "db.3wa.io";
+        $host = "localhost";
     $port = "3306";
     $dbname = "benjaminhaverbeke_distorision";
     $connexionString = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
-
 
 }
