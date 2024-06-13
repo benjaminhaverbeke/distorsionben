@@ -10,11 +10,6 @@ require "models/Salon.php";
 require "models/User.php";
 
 
-/**Controllers */
-require "controllers/PageController.php";
-require "controllers/ChatController.php";
-require "controllers/AuthController.php";
-
 /**Router */
 require "config/Router.php";
 
@@ -26,14 +21,9 @@ require "managers/MessageManager.php";
 require "managers/SalonManager.php";
 require "managers/UserManager.php;";
 
-/**Controller */
+/**Controllers */
 
 require "controllers/AdminController.php";
 require "controllers/AuthController.php";
 require "controllers/ChatController.php";
 require "controllers/PageController.php";
-
-
-/** 
-
-?>
