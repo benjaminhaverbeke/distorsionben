@@ -42,7 +42,7 @@ class ChatController
             // private string $content, private User $author, private Salon $salon, private DateTime $createdAt = new DateTime())
             $message = new Message($_POST["message"], $user, $salon, $currentDateTime);
             $mm->createMessage($message);
-            // header("Location: index.php?route=chat&salon=" . $id);
+            header("Location: index.php?route=chat&salon=" . $id);
         } else {
             $error = "Veuillez rejoindre la communauté des distordu-e-s pour pouvoir poster un message.";
             header("Location: index.php?route=error&error=" . $error);
