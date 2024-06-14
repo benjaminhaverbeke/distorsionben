@@ -34,6 +34,25 @@ class PageController{
         require "templates/layout.phtml";
     }
     
+    public function adminPage():void
+    {
+        $route="adminpage";
+        
+        
+        $um = new UserManager();
+        $mm = new MessageManager();
+        $sm = new SalonManager();
+        $cm = new CategoryManager();
+        
+        $userList = $um->findAll();
+        $salonList = $sm->findAll();
+        $categoryList = $cm->findAll();
+        $postList = $mm->findAll();
+        
+        require "templates/layout.phtml";
+        
+    }
+    
 }
 
 ?>

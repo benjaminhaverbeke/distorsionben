@@ -11,6 +11,8 @@ class Router
         $pc = new PageController();
         $cc = new ChatController();
         $auc = new AuthController();
+        $am = new AdminController();
+        
         if (isset($get["route"]) && $get["route"] === "chat") {
             if (isset($get['salon'])) {
                 $cc->salon($get['salon']);
@@ -41,7 +43,34 @@ class Router
         } elseif (isset($get["route"]) && $get["route"] === "deconnexion") {
 
             $auc->disconnect();
-        } elseif (isset($get["route"]) && $get["route"] === "error") {
+
+        
+        }
+        elseif(isset($get["route"]) && $get["route"] === "adminpage" ){
+            
+            
+            
+            $pc->adminPage();
+        
+        }
+        elseif(isset($get["route"]) && $get["route"] === "create-user" ){
+            
+            
+            
+            $am->createUser();
+        
+        }
+        elseif(isset($get["route"]) && $get["route"] === "delete-user" ){
+            
+            
+            
+            $am->deleteUser($get["user"]);
+        
+        }
+        
+        
+
+        elseif (isset($get["route"]) && $get["route"] === "error") {
             if (isset($get['error'])) {
                 $error = $get['error'];
             } else {
