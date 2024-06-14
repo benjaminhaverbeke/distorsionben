@@ -34,23 +34,17 @@ class AuthController
                 //connect session
                 $_SESSION['email'] = $email;
                 $_SESSION['name'] = $userFound->getName();
-                
-                if($userFound->getRole() === "ADMIN")
-                {
-                    $route= "adminpage";
-                     $_SESSION['role'] = "ADMIN";
-                     
+
+                if ($userFound->getRole() === "ADMIN") {
+                    $route = "adminpage";
+                    $_SESSION['role'] = "ADMIN";
+
                     header("Location: index.php?route=adminpage");
-                
-                
-                }
-                else
-                {
+                } else {
                     $_SESSION['role'] = "USER";
-                  //redirect to home
-                $route = "home";
-                require 'templates/layout.phtml';  
-                    
+                    //redirect to home
+                    $route = "home";
+                    require 'templates/layout.phtml';
                 }
             } else {
                 $route = "error";
@@ -86,10 +80,10 @@ class AuthController
             //if email not found create new user
         } else {
             $instance->createUser($user);
-            $_SESSION['email'] = $email;
+
             //redirect to home
             $route = "home";
-            require 'templates/layout.phtml';
+            header('Location: index.php');
         }
     }
     public function disconnect(): void
