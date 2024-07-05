@@ -1,0 +1,10 @@
+#htaccess file
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^benhav.go.yj.fr
+RewriteCond %{REQUEST_URI} !^/index.php
+RewriteRule ^(.*)$ /
